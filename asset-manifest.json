@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/spinnerWheelVolunteer%20/static/css/main.913b3c98.css",
-    "main.js": "/spinnerWheelVolunteer%20/static/js/main.294483ec.js",
-    "static/js/787.51225af8.chunk.js": "/spinnerWheelVolunteer%20/static/js/787.51225af8.chunk.js",
-    "index.html": "/spinnerWheelVolunteer%20/index.html",
-    "main.913b3c98.css.map": "/spinnerWheelVolunteer%20/static/css/main.913b3c98.css.map",
-    "main.294483ec.js.map": "/spinnerWheelVolunteer%20/static/js/main.294483ec.js.map",
-    "787.51225af8.chunk.js.map": "/spinnerWheelVolunteer%20/static/js/787.51225af8.chunk.js.map"
+    "main.css": "/spinnerWheelVolunteer/static/css/main.913b3c98.css",
+    "main.js": "/spinnerWheelVolunteer/static/js/main.f3a90959.js",
+    "static/js/787.51225af8.chunk.js": "/spinnerWheelVolunteer/static/js/787.51225af8.chunk.js",
+    "index.html": "/spinnerWheelVolunteer/index.html",
+    "main.913b3c98.css.map": "/spinnerWheelVolunteer/static/css/main.913b3c98.css.map",
+    "main.f3a90959.js.map": "/spinnerWheelVolunteer/static/js/main.f3a90959.js.map",
+    "787.51225af8.chunk.js.map": "/spinnerWheelVolunteer/static/js/787.51225af8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.913b3c98.css",
-    "static/js/main.294483ec.js"
+    "static/js/main.f3a90959.js"
   ]
 }
