@@ -2,7 +2,7 @@
   "name": "spinner_wheel",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zackariah_shone.github.io/spinnerWheelVolunteer",
+  "homepage": "https://zackariahshone.github.io/spinnerWheelVolunteer/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
