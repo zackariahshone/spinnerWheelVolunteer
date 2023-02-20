@@ -1,0 +1,10 @@
+.body{
+    height: 100%;
+}
+
+.inputField {
+    height: 200px !important;
+}
+.custom{
+    margin-top: -10%;
+}
