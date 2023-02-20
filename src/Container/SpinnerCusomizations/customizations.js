@@ -7,7 +7,6 @@ export const Customizations = ({ setConfig, config, setPage }) => {
     console.log(config)
     return (
         <div className="custom">
-            <h1>customize</h1>
             <Container>
                 <div>
                     <h1>Customize the spinner! </h1>
@@ -33,6 +32,7 @@ export const Customizations = ({ setConfig, config, setPage }) => {
                                 as="textarea" aria-label="With textarea" />
                         </InputGroup>
                         <Button
+                            style = {{marginTop:'10%'}}
                             onClick={(e) => {
                                 setPage('submit')
                             }}

@@ -9,7 +9,7 @@ export const Home = () => {
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
     const pageConfig = ['spinner', 'customize']
-
+    const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
         switch (pageInput) {
             case 'home':
@@ -27,11 +27,12 @@ export const Home = () => {
     return (
         <Fragment>
             <div>
-                <h1>{page.toLocaleUpperCase()}</h1>
-                {pageConfig.map((nextPage) => {
+                <h1>{spinnerTitle ?spinnerTitle : page.toLocaleUpperCase()}</h1>
+                {pageConfig.map((nextPage,x) => {
                     return (
                         <Button
-                            style = {{margin: '10%'}}
+                            key={`button${x}`}
+                            style = {{margin: '1%'}}
                             onClick={() => {
                                 setPage(nextPage);
                             }}
