@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/spinnerWheelVolunteer/static/css/main.913b3c98.css",
-    "main.js": "/spinnerWheelVolunteer/static/js/main.f3a90959.js",
+    "main.css": "/spinnerWheelVolunteer/static/css/main.dc3edec2.css",
+    "main.js": "/spinnerWheelVolunteer/static/js/main.5bb690e8.js",
     "static/js/787.51225af8.chunk.js": "/spinnerWheelVolunteer/static/js/787.51225af8.chunk.js",
     "index.html": "/spinnerWheelVolunteer/index.html",
-    "main.913b3c98.css.map": "/spinnerWheelVolunteer/static/css/main.913b3c98.css.map",
-    "main.f3a90959.js.map": "/spinnerWheelVolunteer/static/js/main.f3a90959.js.map",
+    "main.dc3edec2.css.map": "/spinnerWheelVolunteer/static/css/main.dc3edec2.css.map",
+    "main.5bb690e8.js.map": "/spinnerWheelVolunteer/static/js/main.5bb690e8.js.map",
     "787.51225af8.chunk.js.map": "/spinnerWheelVolunteer/static/js/787.51225af8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.913b3c98.css",
-    "static/js/main.f3a90959.js"
+    "static/css/main.dc3edec2.css",
+    "static/js/main.5bb690e8.js"
   ]
 }
