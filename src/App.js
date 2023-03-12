@@ -1,22 +1,31 @@
 
 import React from 'react';
 import {
-  BrowserRouter,
+  BrowserRouter as
+  Router,
   Routes,
   Route,
-  Link,
 } from "react-router-dom";
-import { TopNav } from './Component/TopNav/topNav';
-import { SpinnerPage } from './Container/SpinnerPage/spinnerPage';
-import { Customizations } from './Container/SpinnerCusomizations/customizations';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Home } from './Container/Home/home';
-
+import { Admin } from './Container/Admin/admin';
 function App() {
   return (
-    <div className="App">
-      <Home/>    
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route
+            path='spinnerWheelVolunteer'
+            element={<Home/>}
+          />
+           <Route
+            path='admin'
+            element={<Admin/>}
+          />
+          {/* </Route> */}
+        </Routes>
+      </Router>
     </div>
   );
 }
