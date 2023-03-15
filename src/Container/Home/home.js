@@ -1,19 +1,23 @@
 import React, { Fragment, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Customizations as Custom } from "../SpinnerCusomizations/customizations";
 import { SpinnerPage } from "../SpinnerPage/spinnerPage";
-
-
-
+import { SetUser } from "./Components/SetUser";
+import { useSelector } from "react-redux";
+import { currentEmployee } from "../../store/Reducers/UserReducers";
+import './style.css'
 export const Home = () => {
+    const whosSpinning = useSelector(currentEmployee);
+    console.log(whosSpinning);
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
     const pageConfig = ['spinner', 'customize']
     const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
+        
         switch (pageInput) {
             case 'home':
-                return <h1>spinner wheel</h1>
+                return <SetUser setPage={setPage}/>
             case 'spinner':
             case 'submit':
                 return <SpinnerPage spinnerConfig={spinnerConfig} />
@@ -25,7 +29,12 @@ export const Home = () => {
     }
 
     return (
+        <Container>
+
         <Fragment>
+            <span
+                id="whosSpinning"
+            >{whosSpinning ? `${whosSpinning} is currently spinning!`: '' }</span>
             <div>
                 <h1>{spinnerTitle ?spinnerTitle : page.toLocaleUpperCase()}</h1>
                 {pageConfig.map((nextPage,x) => {
@@ -46,6 +55,7 @@ export const Home = () => {
                 {directPage(page)}
             </div>
         </Fragment>
+        </Container>
 
 
     )

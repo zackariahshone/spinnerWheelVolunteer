@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage:storage,
-  // blacklist:['truckSearchState']
+  blacklist:['userState']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
