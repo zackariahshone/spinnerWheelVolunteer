@@ -16,14 +16,13 @@ function App() {
       <Router>
         <Routes>
           <Route
-            path='spinnerWheelVolunteer'
+            path='/'
             element={<Home/>}
           />
            <Route
-            path='admin'
+            path='/admin'
             element={<Admin/>}
           />
-          {/* </Route> */}
         </Routes>
       </Router>
     </div>

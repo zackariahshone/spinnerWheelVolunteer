@@ -15,7 +15,6 @@ export const userSlice = createSlice({
         state.userData = null;
     },
     setUserData:(state,action)=>{
-      console.log(action.payload);
         state.userData = action.payload
     },
     setLocation:(state, action)=>{
@@ -27,7 +26,7 @@ export const userSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { login, logout, setUserData,setLocation } = userSlice.actions;
-export const currentEmployee = (state)=> state.userState.userData?.empName;
+export const currentEmployee = (state)=> state.userState.userData?.employeeData.name;
 export const isLoggedIn = (state) => state.userState.isLoggedIn;
 export const userLocation = (state) => state.userState.userLocation;
 export default userSlice.reducer
