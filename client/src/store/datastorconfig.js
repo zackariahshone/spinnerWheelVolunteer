@@ -1,5 +1,6 @@
 import UserState from './Reducers/UserReducers';
 import HouseReducers from './Reducers/HouseReducers';
+import AdminReducers from './Reducers/AdminReducer';
 import { configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -9,7 +10,8 @@ import { combineReducers } from 'redux';
 // add additional reducers here to build/combine reducers
 const rootReducer = combineReducers({
   userState: UserState,
-  houseState: HouseReducers
+  houseState: HouseReducers,
+  adminState: AdminReducers
 })
 
 const persistConfig = {
