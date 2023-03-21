@@ -1,18 +1,22 @@
 const router = require('express').Router();
 const Employee = require('../../dbconfig/models/Employee')
+const House = require('../../dbconfig/models/House');
 // const jwt = require("jsonwebtoken");
 // const UTILS = require('./utils');
 /**
  * Handle Sign up
  */
-router.get('/checkemployee',
- (req, res)=>{
-    console.log('in get of check emp')
-    res.send('response from get');
- });
+router.get('/getallusers', async (req, res)=>{
+  const allUsers = await Employee.find().lean();
+  console.log(allUsers);
+ res.json(allUsers);
+});
 router.post('/checkemployee', async (req, res) => {
    console.log(req.body)
- const createdUser = await Employee.create(req.body)
+ const createdUser = await Employee.create({
+    "EmployeeName":req.body.name,
+    "EmployeeNumber":req.body.number,
+ });
 //   req.session.signinSuccess = true;
   res.json({ 
     ...createdUser,

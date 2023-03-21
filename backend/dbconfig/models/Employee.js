@@ -4,6 +4,9 @@ const { Schema, model } = require('mongoose');
   EmployeeName: {
     type: String,
   },
+  EmployeeNumber:{
+    type: Number,
+  },
   VideosViewed:[String]
 });
 

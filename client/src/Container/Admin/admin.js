@@ -9,7 +9,6 @@ import "./style.css";
 
 // getAdminData()
 getData('/admindata','GET',{},setAdminDashBoard,{})
-
 const HouseData = async (route, data, method) =>{
     await fetch(route,{
         headers: {
@@ -23,13 +22,18 @@ const houses = ['house1','house2','house3','house4']
 
 
 export const Admin = () => {
-    // useEffect(()=>{
-    // },[])
+   
        
     const [newHouse, setNewHouse] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
     const houseSet = [];
-    Object.values(FullAdminDataSet).forEach(house=>{
+    const empName = [];
+    Object.values(FullAdminDataSet.AllEmployee).forEach(emp=>{
+        if(emp.EmployeeName){
+            empName.push(emp.EmployeeName)
+        }
+    })
+    Object.values(FullAdminDataSet.HouseData).forEach(house=>{
         if(house.HouseName){
             houseSet.push(house.HouseName);
         }
@@ -91,6 +95,13 @@ export const Admin = () => {
                     <Col>
                          <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
+                        <ul>
+                            {
+                                empName.map((name)=>(
+                                    <li>{name}</li>
+                                ))
+                            }
+                        </ul>
                     </Col>
                 </Row>
                 <Row>

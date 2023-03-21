@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const House = require('../../dbconfig/models/House')
+const Employee = require('../../dbconfig/models/Employee')
 // const jwt = require("jsonwebtoken");
 // const UTILS = require('./utils');
 /**
@@ -19,9 +20,9 @@ router.post('/addhouse', async (req, res) => {
     });
 });
 router.get('/admindata',async (req, res)=>{
-    const retrievedData = await House.find().lean()
-    console.log(retrievedData);
-    res.json(retrievedData)
+    const HouseData = await House.find().lean()
+    const AllEmployee = await Employee.find().lean()
+    res.json({HouseData,AllEmployee})
 })
 
 module.exports = router;
