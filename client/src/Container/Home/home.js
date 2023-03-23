@@ -11,7 +11,7 @@ export const Home = () => {
     console.log(whosSpinning);
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
-    const pageConfig = ['spinner', 'customize']
+    const pageConfig = []
     const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
         
@@ -34,7 +34,7 @@ export const Home = () => {
         <Fragment>
             <span
                 id="whosSpinning"
-            >{whosSpinning ? `${whosSpinning} is currently spinning!`: '' }</span>
+            >{whosSpinning ? `${whosSpinning} is currently spinning!`: 'No body is signed in' }</span>
             <div>
                 <h1>{spinnerTitle ?spinnerTitle : page.toLocaleUpperCase()}</h1>
                 {pageConfig.map((nextPage,x) => {

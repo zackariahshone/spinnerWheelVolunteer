@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    house1:'',
-    house2:'',
-    house3:''
 }
 
 export const houseSlice = createSlice({
@@ -29,5 +26,5 @@ export const houseSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setNewHouse, deleteHouse, editHouse, setCurrentHouse } = houseSlice.actions;
-export const currentHouse = (state)=> state.houseConfig.currentHouse;
+export const currentHouse = (state)=> state.houseState.currentHouse;
 export default houseSlice.reducer

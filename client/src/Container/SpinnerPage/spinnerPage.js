@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 // import React, { Component } from 'react'
-
+import { currentHouse } from "../../store/Reducers/HouseReducers";
+import { useSelector, useDispatch } from 'react-redux';
 import WheelComponent from 'react-wheel-of-prizes'
 
 
@@ -15,12 +16,16 @@ const RenderWinnerLink = (winner, list) => {
 }
 
 export const SpinnerPage = ({ spinnerConfig }) => {
-  const { spinnerTitle, speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
+  const selectedHouse =  useSelector(currentHouse);
+  console.log(selectedHouse);
+  const { speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
   var arrContainer = {};
-  spinnerEntries?.split(',').forEach((entry) => {
+  
+  selectedHouse.links?.split(',').forEach((entry) => {
     const segmentForSpinner = entry.split(/-(.*)/g);
     arrContainer = {...arrContainer,[segmentForSpinner[0]] : segmentForSpinner[1]}
   });
+  const spinnerTitle = currentHouse.name;
   const [showWinnerLink, setShowWinnerLink] = useState(false)
   const [winnerTitle, setWinnerTitle] = useState()
   const segments = [
@@ -57,9 +62,9 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   }
   return (
     <Container>
+    {selectedHouse.name?selectedHouse.name:'no house selected yet'}
       <Row>
         <Col xs={6}>
-
           <Fragment>
             <WheelComponent
               segments={ Object.keys(arrContainer).length !== 0 ? Object.keys(arrContainer) : segments}
