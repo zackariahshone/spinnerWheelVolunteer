@@ -4,11 +4,8 @@ require('dotenv').config()
 const connectionString = 'mongodb+srv://zackariahshone:Zs72756AR4010!@nonprofitcluster.oe6muis.mongodb.net/?retryWrites=true&w=majority';
 const connection = mongoose.connect(connectionString);
 
-mongoose.set(
-    {
+mongoose.set({
         'debug': true,
-        autoIndex:true
-    }
-    );
+    });
 
 module.exports = connection

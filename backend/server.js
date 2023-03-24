@@ -8,9 +8,9 @@ require('./dbconfig/connection');
 
 // Initialize the app and create a port
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy', 1) 
 
 app.use(session({
   secret: 'keyboard cat',
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(routes);
-// // app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 app.listen(PORT, () => console.log(`Listing on  port ${PORT}`));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
