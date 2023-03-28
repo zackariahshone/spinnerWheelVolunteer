@@ -3,14 +3,21 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from "../../../store/Reducers/UserReducers";
 
-const checkEmployee = async (empInfo)=>{
+const checkEmployee = async (empInfo, setPage)=>{
      await fetch('/checkemployee',{
         headers: {
             "Content-Type": "application/json",
           },
         method:"POST",
         body: JSON.stringify(empInfo)
-    });
+    }).then(res=>res.json()).then((response)=>{
+        if(response.status === 200){
+            setPage('spinner');
+        }
+        else{
+
+        }
+    })
 }
 
 export const SetUser = (props)=>{
@@ -59,9 +66,8 @@ export const SetUser = (props)=>{
                                 number:employeeNumber
                             }
                             if(empName){
-                            checkEmployee(employeeData)
+                            checkEmployee(employeeData,setPage)
                             dispatch(setUserData({employeeData}))
-                            setPage('spinner');
                             }
                         }}
                     > Set it </Button>

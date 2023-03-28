@@ -24,19 +24,24 @@ router.get('/getallusers', async (req, res)=>{
   console.log(allUsers);
  res.json(allUsers);
 });
+
 router.post('/checkemployee', async (req, res) => {
-   console.log(req.body)
- const createdUser = await Employee.create({
-    "EmployeeName":req.body.name,
-    "EmployeeNumber":req.body.number,
- });
-//  console.log(await createdUser.validate());
-//   req.session.signinSuccess = true;
-  res.json({ 
-    ...createdUser,
-    status: 200 
-});
-});
+  try{
+    console.log(req.body)
+    const createdUser = await Employee.create({
+      "EmployeeName":req.body.name,
+      "EmployeeNumber":req.body.number,
+    });
+    //  console.log(await createdUser.validate());
+    //   req.session.signinSuccess = true;
+    res.json({ 
+      ...createdUser,
+      status: 200 
+    });
+  }catch(e){
+    res.send(e)
+  }
+  });
 /**
  * Handle log in 
  */

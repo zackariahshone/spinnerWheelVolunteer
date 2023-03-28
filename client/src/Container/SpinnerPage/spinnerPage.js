@@ -21,7 +21,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   const { speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
   var arrContainer = {};
   
-  selectedHouse.links?.split(',').forEach((entry) => {
+  selectedHouse?.links?.split(',').forEach((entry) => {
     const segmentForSpinner = entry.split(/-(.*)/g);
     arrContainer = {...arrContainer,[segmentForSpinner[0]] : segmentForSpinner[1]}
   });
@@ -62,7 +62,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   }
   return (
     <Container>
-    {selectedHouse.name?selectedHouse.name:'no house selected yet'}
+    {selectedHouse?.name ? selectedHouse.name:'no house selected yet'}
       <Row>
         <Col xs={6}>
           <Fragment>
