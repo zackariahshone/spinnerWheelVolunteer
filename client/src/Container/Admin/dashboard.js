@@ -37,8 +37,8 @@ export const AdminDashBoard = (props) => {
                 <Col>
                     EmployeeNumber: {thisEmpl.EmployeeNumber}
                 </Col>
-            </Row>
-            <Row>
+            {/* </Row>
+            <Row> */}
                 <Col>
                     Number Of Videos Viewed: {thisEmpl.VideosViewed.length}
                 </Col>

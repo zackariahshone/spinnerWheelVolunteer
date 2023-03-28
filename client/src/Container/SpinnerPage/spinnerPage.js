@@ -1,29 +1,47 @@
 import React, { Fragment, useState } from "react";
-import { Col, Row, Container } from "react-bootstrap";
-// import React, { Component } from 'react'
+import { Col, Row, Container, Button } from "react-bootstrap";
+// import React, { Component, Button } from 'react'
+import { currentEmployee } from "../../store/Reducers/UserReducers";
 import { currentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import WheelComponent from 'react-wheel-of-prizes'
 
 
-
-const RenderWinnerLink = (winner, list) => {
-  return (
-    <>
-      <a target="blank" href={list[winner]}><h1>{winner}</h1></a>
-    </>
-  )
+const setEmployeeVideoData = (emp, house, video) => {
+  console.log(emp, house, video);
+  fetch('/addwatchedvideo', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({emp, house, video })
+  })
 }
 
+
 export const SpinnerPage = ({ spinnerConfig }) => {
-  const selectedHouse =  useSelector(currentHouse);
-  console.log(selectedHouse);
+  const selectedHouse = useSelector(currentHouse);
+  const currentSpinner = useSelector(currentEmployee);
+  const RenderWinnerLink = (winner, list) => {
+    return (
+      <a className="winnertext" target="blank" href={list[winner]}>
+        <Button
+          onClick={() => {
+            setEmployeeVideoData(currentSpinner, selectedHouse, winner)
+          }}
+        >
+          <h1>{winner}</h1>
+        </Button>
+      </a>
+    )
+  }
   const { speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
   var arrContainer = {};
-  
+
   selectedHouse?.links?.split(',').forEach((entry) => {
     const segmentForSpinner = entry.split(/-(.*)/g);
-    arrContainer = {...arrContainer,[segmentForSpinner[0]] : segmentForSpinner[1]}
+    arrContainer = { ...arrContainer, [segmentForSpinner[0]]: segmentForSpinner[1] }
   });
   const spinnerTitle = currentHouse.name;
   const [showWinnerLink, setShowWinnerLink] = useState(false)
@@ -62,12 +80,12 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   }
   return (
     <Container>
-    {selectedHouse?.name ? selectedHouse.name:'no house selected yet'}
+      {selectedHouse?.name ? selectedHouse.name : 'no house selected yet'}
       <Row>
         <Col xs={6}>
           <Fragment>
             <WheelComponent
-              segments={ Object.keys(arrContainer).length !== 0 ? Object.keys(arrContainer) : segments}
+              segments={Object.keys(arrContainer).length !== 0 ? Object.keys(arrContainer) : segments}
               segColors={segColors}
               onFinished={(winner) => onFinished(winner)}
               primaryColor='white'
@@ -83,7 +101,9 @@ export const SpinnerPage = ({ spinnerConfig }) => {
           </Fragment>
         </Col>
         <Col>
-          {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer) : ''}
+          <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer) : ''}</p>
+          {/* {showWinnerLink && arrContainer ? <iframe src={arrContainer[winnerTitle]} width="300" height="250" allow="autoplay"></iframe>:''} */}
+          {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
         </Col>
       </Row>
     </Container>

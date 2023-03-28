@@ -8,8 +8,10 @@ const { Schema, model } = require('mongoose');
     type: Number,
     unique: true
   },
-  VideosViewed:[String]
-});
+  VideosViewed:{
+    type: Schema.Types.Mixed
+  }
+}); 
 
 const Employee = model('Employee', EmployeeSchema);
 module.exports = Employee;

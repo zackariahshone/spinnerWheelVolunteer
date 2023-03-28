@@ -3,18 +3,20 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from "../../../store/Reducers/UserReducers";
 
-const checkEmployee = async (empInfo, setPage)=>{
+const checkEmployee = async (employeeData, setPage, setRedux)=>{
      await fetch('/checkemployee',{
         headers: {
             "Content-Type": "application/json",
           },
         method:"POST",
-        body: JSON.stringify(empInfo)
+        body: JSON.stringify(employeeData)
     }).then(res=>res.json()).then((response)=>{
-        console.log(response.status);
-        if(response.status === 200 ||
-            response.status === '200'
+        const {EmployeeName,EmployeeNumber} = response._doc;   
+        if((response.status === 200 ||
+            response.status === '200') && 
+          (  employeeData.name === EmployeeName && employeeData.number == EmployeeNumber)
             ){
+            setRedux(setUserData({employeeData}))
             setPage('spinner');
         }
     })
@@ -25,6 +27,7 @@ export const SetUser = (props)=>{
     const dispatch = useDispatch();
     const [empName, setEmpName ] = useState();
     const [employeeNumber, setEmployeeNumber] = useState();
+    const [error, setError ]= useState();
     return(
         <Fragment>
             <>Who is Spinning today</>
@@ -66,8 +69,7 @@ export const SetUser = (props)=>{
                                 number:employeeNumber
                             }
                             if(empName){
-                            checkEmployee(employeeData,setPage)
-                            dispatch(setUserData({employeeData}))
+                            checkEmployee(employeeData,setPage,dispatch)
                             }
                         }}
                     > Set it </Button>
