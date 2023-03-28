@@ -11,12 +11,15 @@ const checkEmployee = async (empInfo, setPage)=>{
         method:"POST",
         body: JSON.stringify(empInfo)
     }).then(res=>res.json()).then((response)=>{
-        if(response.status === 200){
+        console.log(response.status);
+        if(response.status === 200 ||
+            response.status === '200'
+            ){
             setPage('spinner');
         }
-        else{
-
-        }
+        // else{
+        //     setPage('spinner')
+        // }
     })
 }
 
