@@ -19,6 +19,25 @@ router.post('/addhouse', async (req, res) => {
         status: 200
     });
 });
+
+router.post('/deletehouse',async (req, res)=>{
+    console.log(req.body);
+    // await House.deleteOne({ _id: req.body.id })
+    await House.findByIdAndDelete({ _id: req.body.id });
+    const HouseData = await House.find().lean()
+    const AllEmployee = await Employee.find().lean()
+    res.json({HouseData,AllEmployee})
+//    res.send(newHouse);
+})
+router.post('/deleteemployee',async (req, res)=>{
+    console.log(req.body);
+    // await House.deleteOne({ _id: req.body.id })
+    await Employee.findByIdAndDelete({ _id: req.body.id });
+    const HouseData = await House.find().lean()
+    const AllEmployee = await Employee.find().lean()
+    res.json({HouseData,AllEmployee})
+//    res.send(newHouse);
+})
 router.get('/admindata',async (req, res)=>{
     const HouseData = await House.find().lean()
     const AllEmployee = await Employee.find().lean()

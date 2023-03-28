@@ -6,6 +6,19 @@ const House = require('../../dbconfig/models/House');
 /**
  * Handle Sign up
  */
+
+router.get('/dropallemployees',async(req,res)=>{
+  try{
+    const dropEmployees = await Employee.collection.drop();
+    console.log(dropEmployees);
+    res.send('employees dropped')
+  }catch(error){
+    console.log(error);
+    res.send('oops')
+  }
+})
+
+
 router.get('/getallusers', async (req, res)=>{
   const allUsers = await Employee.find().lean();
   console.log(allUsers);
@@ -17,6 +30,7 @@ router.post('/checkemployee', async (req, res) => {
     "EmployeeName":req.body.name,
     "EmployeeNumber":req.body.number,
  });
+//  console.log(await createdUser.validate());
 //   req.session.signinSuccess = true;
   res.json({ 
     ...createdUser,

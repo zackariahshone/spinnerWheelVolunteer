@@ -8,13 +8,11 @@ import { currentEmployee } from "../../store/Reducers/UserReducers";
 import './style.css'
 export const Home = () => {
     const whosSpinning = useSelector(currentEmployee);
-    console.log(whosSpinning);
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
     const pageConfig = []
     const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
-        
         switch (pageInput) {
             case 'home':
                 return <SetUser setPage={setPage}/>

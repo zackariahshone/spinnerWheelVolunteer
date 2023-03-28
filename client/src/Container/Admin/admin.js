@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
 import { getData } from "../../utils/requests"
-import { setAdminDashBoard, adminDataSet } from '../../store/Reducers/AdminReducer';
+import { setAdminDashBoard, adminDataSet,deleteUser, deleteHouse } from '../../store/Reducers/AdminReducer';
 import { setCurrentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -20,27 +20,36 @@ const HouseData = async (route, data, method) => {
         method: method
     })
 }
-const houses = ['house1', 'house2', 'house3', 'house4']
-
-
 export const Admin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [newHouse, setNewHouse] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
-    let houseSet = {};
+    let houseSet = [];
     const empName = [];
-    Object.values(FullAdminDataSet.AllEmployee).forEach(emp => {
+    console.log(FullAdminDataSet);
+    if(FullAdminDataSet !== null){
+    Object?.values(FullAdminDataSet?.AllEmployee)?.forEach(emp => {
         if (emp.EmployeeName) {
-            empName.push(emp.EmployeeName)
+            const newHouse = {
+                [emp.EmployeeName]: emp.VideosViewed,
+                id: emp._id
+            };
+            empName.push(newHouse);
         }
     })
+}
+
     Object.values(FullAdminDataSet.HouseData).forEach(house => {
         if (house.HouseName && typeof house.Videos === 'string') {
-            houseSet = { [house.HouseName]: house.Videos, ...houseSet };
+            const newHouse = {
+                [house.HouseName]: house.Videos,
+                id: house._id
+            };
+            houseSet.push(newHouse);
         }
     })
-    console.log(houseSet)
+
     return (
         <>
             <p>ADMIN PAGE</p>
@@ -90,41 +99,69 @@ export const Admin = () => {
                     >
                         <h4>List of Houses</h4>
                         <ul>
-                            {Object.keys(houseSet).map((house) => (
-                                <li>
-                                    <Button
-                                        onClick={(e) => {
-                                            dispatch(setCurrentHouse(
-                                                {
-                                                    links: (houseSet[house]),
-                                                    name: house
-                                                }
-                                            ))
-                                            navigate('/');
-                                        }}
-                                    >{house}</Button>
+                            {houseSet.map((house) => {
+                                const houseKeys = Object.keys(house);
+                                return (
+                                    <li>
+                                        <Button
+                                            onClick={(e) => {
+                                                dispatch(setCurrentHouse(
+                                                    {
+                                                        links: house[houseKeys[0]],
+                                                        name: houseKeys[0]
+                                                    }
+                                                ))
+                                                navigate('/');
+                                            }}
+                                        >{houseKeys[0]}</Button>
+                                        <span
+                                            onClick={() => {
+                                                getData('/deletehouse','POST',{id:house[houseKeys[1]]},deleteUser,{},'res')
+                                            }}
+                                    >x</span>
                                 </li>
-                            ))}
-                        </ul>
-                    </Col>
-                    <Col>
-                        <h4>Employee Insight</h4>
-                        <p>Who has selected which videos</p>
-                        <ul>
-                            {
-                                empName.map((name) => (
-                                    <li>{name}</li>
-                                ))
-                            }
-                        </ul>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h2>Dashbord</h2>
-                    </Col>
-                </Row>
-            </Container>
+                        )
+                            })}
+                    </ul>
+                </Col>
+                <Col>
+                    <h4>Employee Insight</h4>
+                    <p>Who has selected which videos</p>
+                    <ul>
+                        
+                            {empName.map((emp) => {
+                                const houseKeys = Object.keys(emp);
+                                return (
+                                    <li>
+                                        <Button
+                                            onClick={(e) => {
+                                                dispatch(setCurrentHouse(
+                                                    {
+                                                        links: emp[houseKeys[0]],
+                                                        name: houseKeys[0]
+                                                    }
+                                                ))
+                                                navigate('/');
+                                            }}
+                                        >{houseKeys[0]}</Button>
+                                        <span
+                                            onClick={() => {
+                                                getData('/deleteemployee','POST',{id:emp[houseKeys[1]]},deleteHouse,{},'res')
+                                            }}
+                                    >x</span>
+                                </li>
+                        )
+                            })}
+                        
+                    </ul>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h2>Dashbord</h2>
+                </Col>
+            </Row>
+        </Container>
         </>
     )
 }

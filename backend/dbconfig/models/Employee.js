@@ -6,6 +6,7 @@ const { Schema, model } = require('mongoose');
   },
   EmployeeNumber:{
     type: Number,
+    unique: true
   },
   VideosViewed:[String]
 });
