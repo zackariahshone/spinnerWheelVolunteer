@@ -1,0 +1,15 @@
+steps:
+- name: node:10.15.1
+  entrypoint: npm
+  args: ["install"]
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+options:
+  machineType: 'E2_HIGHCPU_8'
+timeout: "1600s"
+# - name: node:10.15.1
+#   entrypoint: npm
+#   args: ["run", "create-env"]
+#   env:
+#     - 'MONGO_CONNECTION=${_MONGO_CONNECTION}'
+#     - 'REACT_APP_GOOGLE_MAPS_API=${_GOOGLE_MAP_API_KEY}'

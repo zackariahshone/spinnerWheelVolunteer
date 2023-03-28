@@ -27,7 +27,7 @@ export const SetUser = (props)=>{
     const [employeeNumber, setEmployeeNumber] = useState();
     return(
         <Fragment>
-            <>Who's Spinning today</>
+            <>Who is Spinning today</>
             <Container>
                 <Row>
                     <Col
