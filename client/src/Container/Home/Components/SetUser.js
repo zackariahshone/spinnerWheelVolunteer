@@ -17,9 +17,6 @@ const checkEmployee = async (empInfo, setPage)=>{
             ){
             setPage('spinner');
         }
-        // else{
-        //     setPage('spinner')
-        // }
     })
 }
 

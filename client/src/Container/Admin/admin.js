@@ -5,7 +5,7 @@ import { setAdminDashBoard, adminDataSet,deleteUser, deleteHouse } from '../../s
 import { setCurrentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-
+import { AdminDashBoard } from "./dashboard";
 import "./style.css";
 
 
@@ -24,6 +24,7 @@ export const Admin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [newHouse, setNewHouse] = useState();
+    const [employeeToView,setEmployeeToView] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
     let houseSet = [];
     const empName = [];
@@ -135,13 +136,7 @@ export const Admin = () => {
                                     <li>
                                         <Button
                                             onClick={(e) => {
-                                                dispatch(setCurrentHouse(
-                                                    {
-                                                        links: emp[houseKeys[0]],
-                                                        name: houseKeys[0]
-                                                    }
-                                                ))
-                                                navigate('/');
+                                              setEmployeeToView(houseKeys[0])
                                             }}
                                         >{houseKeys[0]}</Button>
                                         <span
@@ -159,7 +154,10 @@ export const Admin = () => {
             <Row>
                 <Col>
                     <h2>Dashbord</h2>
-                </Col>
+                </Col>  
+            </Row>
+            <Row>
+                {employeeToView ? <AdminDashBoard employeeKey = {employeeToView} dataset = {FullAdminDataSet}/>:''}
             </Row>
         </Container>
         </>
