@@ -32,10 +32,10 @@ export const AdminDashBoard = (props) => {
         <Container>
             <Row>
                 <Col>
-                    EmployeeNumber: {thisEmpl.EmployeeNumber}
+                    EmployeeName: {thisEmpl.EmployeeName}
                 </Col>
                 <Col>
-                    EmployeeNumber: {thisEmpl.EmployeeName}
+                    EmployeeNumber: {thisEmpl.EmployeeNumber}
                 </Col>
             </Row>
             <Row>
