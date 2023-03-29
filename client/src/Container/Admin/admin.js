@@ -99,6 +99,9 @@ export const Admin = () => {
                         xs={4}
                     >
                         <h4>List of Houses</h4>
+                        <div
+                            className="scroll scrollist"
+                        >
 
                         {houseSet.map((house) => {
                             const houseKeys = Object.keys(house);
@@ -128,11 +131,15 @@ export const Admin = () => {
                                 </p>
                             )
                         })}
-
+                        </div>
                     </Col>
                     <Col>
                         <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
+                        <div
+                            className="scrolllist scroll"
+                        >
+
                         {empName.map((emp) => {
                             const houseKeys = Object.keys(emp);
                             return (
@@ -157,6 +164,7 @@ export const Admin = () => {
                         </div>
                             )
                         })}
+                        </div>
                     </Col>
                 </Row>
                 <Row>

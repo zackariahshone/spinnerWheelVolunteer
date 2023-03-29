@@ -1,3 +1,16 @@
 #whosSpinning{
     float:right;
 }
+
+.setUser{
+    border-radius: 1px;
+    border-style: solid;
+    border-color: dimgray;
+    border-radius: 25px;
+    width:50%;
+    margin:auto;
+    top: 50%;
+    left: 50%;
+    margin-top: 10%;
+    padding:1%;
+}

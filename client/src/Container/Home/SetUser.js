@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserData } from "../../../store/Reducers/UserReducers";
+import { setUserData } from "../../store/Reducers/UserReducers";
 
 const checkEmployee = async (employeeData, setPage, setRedux)=>{
      await fetch('/checkemployee',{
@@ -29,7 +29,9 @@ export const SetUser = (props)=>{
     const [employeeNumber, setEmployeeNumber] = useState();
     const [error, setError ]= useState();
     return(
-        <Fragment>
+        <div
+            className = "setUser"
+        >
             <>Who is Spinning today</>
             <Container>
                 <Row>
@@ -48,7 +50,7 @@ export const SetUser = (props)=>{
                 </Row>
                 <Row>
                     <Col
-                        style={{paddingTop:'10%'}}
+                        style={{paddingTop:'5%'}}
                     >
                         <label
                             style={{marginRight:'10%'}}
@@ -74,6 +76,6 @@ export const SetUser = (props)=>{
                         }}
                     > Set it </Button>
             </Container>
-        </Fragment>
+        </div>
     )
 }
