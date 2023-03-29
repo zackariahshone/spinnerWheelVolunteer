@@ -102,7 +102,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
         </Col>
         <Col>
           <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer) : ''}</p>
-          {/* {showWinnerLink && arrContainer ? <iframe src={arrContainer[winnerTitle]} width="300" height="250" allow="autoplay"></iframe>:''} */}
+          {showWinnerLink && arrContainer ? <iframe src={arrContainer[winnerTitle]} width="500" height="350" allow="autoplay"></iframe>:''}
           {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
         </Col>
       </Row>
