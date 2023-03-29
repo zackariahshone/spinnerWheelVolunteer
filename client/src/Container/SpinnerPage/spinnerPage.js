@@ -25,15 +25,17 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   const currentSpinner = useSelector(currentEmployee);
   const RenderWinnerLink = (winner, list) => {
     return (
-      <a className="winnertext" target="blank" href={list[winner]}>
-        <Button
+      <>
+      <Button
           onClick={() => {
             setEmployeeVideoData(currentSpinner, selectedHouse, winner)
+            setShowVideo(true);
           }}
         >
           <h1>{winner}</h1>
         </Button>
-      </a>
+        <p>Press the button to display the video</p>
+      </>
     )
   }
   const { speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
@@ -46,6 +48,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   const spinnerTitle = currentHouse.name;
   const [showWinnerLink, setShowWinnerLink] = useState(false)
   const [winnerTitle, setWinnerTitle] = useState()
+  const [showVideo, setShowVideo] = useState();
   const segments = [
     'better luck next time',
     'won 70',
@@ -75,6 +78,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
     '#FF9000'
   ]
   const onFinished = (winner) => {
+    setShowVideo(false)
     setShowWinnerLink(true);
     setWinnerTitle(winner)
   }
@@ -102,7 +106,27 @@ export const SpinnerPage = ({ spinnerConfig }) => {
         </Col>
         <Col>
           <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer) : ''}</p>
-          {showWinnerLink && arrContainer ? <iframe src={arrContainer[winnerTitle]} width="500" height="350" allow="autoplay"></iframe>:''}
+          {console.log(showVideo)}
+          {showVideo ? 
+          <>
+          <div
+            onClick={(e)=>{
+              console.log(e,'iframe event')
+            }} 
+            >
+          <iframe 
+            onFocus={()=>{
+              console.log('iframe play')
+            }}
+            src={arrContainer[winnerTitle]} 
+            width="500" 
+            height="350" 
+            allow="autoplay"></iframe>
+          </div>  
+          <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a>
+
+          </>
+            :''}
           {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
         </Col>
       </Row>
