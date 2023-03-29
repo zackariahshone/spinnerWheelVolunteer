@@ -32,18 +32,24 @@ export const AdminDashBoard = (props) => {
         <Container>
             <Row>
                 <Col>
-                    EmployeeName: {thisEmpl.EmployeeName}
+                   <b> EmployeeName: </b> {thisEmpl?.EmployeeName}
                 </Col>
                 <Col>
-                    EmployeeNumber: {thisEmpl.EmployeeNumber}
+                   <b> EmployeeNumber: </b> {thisEmpl?.EmployeeNumber}
                 </Col>
             {/* </Row>
             <Row> */}
                 <Col>
-                    Number Of Videos Viewed: {thisEmpl.VideosViewed.length}
+                   <b> Number Of Videos Viewed:</b> {thisEmpl?.VideosViewed.length}
                 </Col>
                 <Col>
-                    Number Of Videos Viewed: {thisEmpl.VideosViewed.length === 0 ? "No videos have been viewd":''}
+                   <b> Videos Viewed:</b> {thisEmpl?.VideosViewed.length === 0 ? "No videos have been viewd":
+                    <div>
+                        {thisEmpl?.VideosViewed.map((video)=>(
+                            <p>{video}</p>
+                        ))}
+                    </div>
+                    }
                 </Col>
             </Row>
         </Container>

@@ -55,7 +55,7 @@ export const SetUser = (props)=>{
                         >Employee Number: </label>
                         <input
                             onChange={(e)=>{
-                                setEmployeeNumber(e.target.value)
+                                setEmployeeNumber(e.target.value.trim())
                             }}
                         />
                     </Col>

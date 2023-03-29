@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
 import { getData } from "../../utils/requests"
-import { setAdminDashBoard, adminDataSet,deleteUser, deleteHouse } from '../../store/Reducers/AdminReducer';
+import { setAdminDashBoard, adminDataSet, deleteUser, deleteHouse } from '../../store/Reducers/AdminReducer';
 import { setCurrentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -24,22 +24,22 @@ export const Admin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [newHouse, setNewHouse] = useState();
-    const [employeeToView,setEmployeeToView] = useState();
+    const [employeeToView, setEmployeeToView] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
     let houseSet = [];
     const empName = [];
     console.log(FullAdminDataSet);
-    if(FullAdminDataSet !== null){
-    Object?.values(FullAdminDataSet?.AllEmployee)?.forEach(emp => {
-        if (emp.EmployeeName) {
-            const newHouse = {
-                [emp.EmployeeName]: emp.VideosViewed,
-                id: emp._id
-            };
-            empName.push(newHouse);
-        }
-    })
-}
+    if (FullAdminDataSet !== null) {
+        Object?.values(FullAdminDataSet?.AllEmployee)?.forEach(emp => {
+            if (emp.EmployeeName) {
+                const newHouse = {
+                    [emp.EmployeeName]: emp.VideosViewed,
+                    id: emp._id
+                };
+                empName.push(newHouse);
+            }
+        })
+    }
 
     Object.values(FullAdminDataSet.HouseData).forEach(house => {
         if (house.HouseName && typeof house.Videos === 'string') {
@@ -99,67 +99,75 @@ export const Admin = () => {
                         xs={4}
                     >
                         <h4>List of Houses</h4>
-                        <ul>
-                            {houseSet.map((house) => {
-                                const houseKeys = Object.keys(house);
-                                return (
-                                    <li>
-                                        <Button
-                                            onClick={(e) => {
-                                                dispatch(setCurrentHouse(
-                                                    {
-                                                        links: house[houseKeys[0]],
-                                                        name: houseKeys[0]
-                                                    }
-                                                ))
-                                                navigate('/');
-                                            }}
-                                        >{houseKeys[0]}</Button>
-                                        <span
-                                            onClick={() => {
-                                                getData('/deletehouse','POST',{id:house[houseKeys[1]]},deleteUser,{},'res')
-                                            }}
-                                    >x</span>
-                                </li>
-                        )
-                            })}
-                    </ul>
-                </Col>
-                <Col>
-                    <h4>Employee Insight</h4>
-                    <p>Who has selected which videos</p>
-                    <ul>
-                        
-                            {empName.map((emp) => {
-                                const houseKeys = Object.keys(emp);
-                                return (
-                                    <li>
-                                        <Button
-                                            onClick={(e) => {
-                                              setEmployeeToView(houseKeys[0])
-                                            }}
-                                        >{houseKeys[0]}</Button>
-                                        <span
-                                            onClick={() => {
-                                                getData('/deleteemployee','POST',{id:emp[houseKeys[1]]},deleteHouse,{},'res')
-                                            }}
-                                    >x</span>
-                                </li>
-                        )
-                            })}
-                        
-                    </ul>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <h2>Dashbord</h2>
-                </Col>  
-            </Row>
-            <Row>
-                {employeeToView ? <AdminDashBoard employeeKey = {employeeToView} dataset = {FullAdminDataSet}/>:''}
-            </Row>
-        </Container>
+
+                        {houseSet.map((house) => {
+                            const houseKeys = Object.keys(house);
+                            return (
+                                <p
+                                    className="listItem"
+                                >
+
+                                    <Button
+                                        className="listbutton"
+                                        onClick={(e) => {
+                                            dispatch(setCurrentHouse(
+                                                {
+                                                    links: house[houseKeys[0]],
+                                                    name: houseKeys[0]
+                                                }
+                                            ))
+                                            navigate('/');
+                                        }}
+                                    >{houseKeys[0]}</Button>
+                                    <span
+                                        className="delete"
+                                        onClick={() => {
+                                            getData('/deletehouse', 'POST', { id: house[houseKeys[1]] }, deleteUser, {}, 'res')
+                                        }}
+                                    ><b>x</b></span>
+                                </p>
+                            )
+                        })}
+
+                    </Col>
+                    <Col>
+                        <h4>Employee Insight</h4>
+                        <p>Who has selected which videos</p>
+                        {empName.map((emp) => {
+                            const houseKeys = Object.keys(emp);
+                            return (
+                        <div id="box">
+                            <div id="borderLeft" className="bottom"></div>
+                                <p
+                                    className="listItem"
+                                >
+                                    <Button
+                                        className="listbutton"
+                                        onClick={(e) => {
+                                            setEmployeeToView(houseKeys[0])
+                                        }}
+                                    >{houseKeys[0]}</Button>
+                                    <span
+                                        className="delete"
+                                        onClick={() => {
+                                            getData('/deleteemployee', 'POST', { id: emp[houseKeys[1]] }, deleteHouse, {}, 'res')
+                                        }}
+                                    > <b>x</b></span>
+                                </p>
+                        </div>
+                            )
+                        })}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h2>Dashbord</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    {employeeToView ? <AdminDashBoard employeeKey={employeeToView} dataset={FullAdminDataSet} /> : ''}
+                </Row>
+            </Container>
         </>
     )
 }

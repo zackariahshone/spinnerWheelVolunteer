@@ -3,3 +3,17 @@
     border-color: black;
     border-width: 0px 1px 0px 0px;
 }
+.delete{
+    color:red;
+    float: right;
+    cursor: pointer;
+}
+
+.listItem{
+    border-bottom: black;
+    border-style: dotted;
+    border-width: 0px 0px 1px 0px;
+    text-align: left;
+}
+
+

@@ -26,13 +26,10 @@ router.get('/getallusers', async (req, res)=>{
 });
 
 router.post('/addwatchedvideo',async(req,res)=>{
-  console.log(req.body);
-  const houseName = req.body.house.name;
-  const videoToAdd = [req.body.video];
-  const dataToAdd = {[houseName]:videoToAdd}
+  const empToEdit = await Employee.findOne({EmployeeName:req.body.emp})
+  const videoToAdd = req.body.video;
+  const updated = await Employee.findOneAndUpdate({EmployeeName:req.body.emp},{$push:{'VideosViewed':videoToAdd}})
 
- const updated = await Employee.findOneAndUpdate({EmployeeName:req.body.emp},{'VideosViewed':[{[houseName]:videoToAdd}]})
- console.log(updated);
 })
 
 router.post('/checkemployee', async (req, res) => {
