@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import { Col, Row, Container, Button } from "react-bootstrap";
-// import React, { Component, Button } from 'react'
 import { currentEmployee } from "../../store/Reducers/UserReducers";
 import { currentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
