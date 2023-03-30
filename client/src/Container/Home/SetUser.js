@@ -3,24 +3,6 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from "../../store/Reducers/UserReducers";
 
-const checkEmployee = async (employeeData, setPage, setRedux)=>{
-     await fetch('/checkemployee',{
-        headers: {
-            "Content-Type": "application/json",
-          },
-        method:"POST",
-        body: JSON.stringify(employeeData)
-    }).then(res=>res.json()).then((response)=>{
-        const {EmployeeName,EmployeeNumber} = response._doc;   
-        if((response.status === 200 ||
-            response.status === '200') && 
-          (  employeeData.name === EmployeeName && employeeData.number == EmployeeNumber)
-            ){
-            setRedux(setUserData({employeeData}))
-            setPage('spinner');
-        }
-    })
-}
 
 export const SetUser = (props)=>{
     const { setPage } = props;
@@ -28,6 +10,33 @@ export const SetUser = (props)=>{
     const [empName, setEmpName ] = useState();
     const [employeeNumber, setEmployeeNumber] = useState();
     const [error, setError ]= useState();
+    const checkEmployee = async (employeeData, setPage, setRedux)=>{
+         await fetch('/checkemployee',{
+            headers: {
+                "Content-Type": "application/json",
+              },
+            method:"POST",
+            body: JSON.stringify(employeeData)
+        }).then(res=>res.json()).then((response)=>{
+            if(response._doc){
+
+                const {EmployeeName,EmployeeNumber} = response._doc;   
+                if((response.status === 200 ||
+                response.status === '200') && 
+              (  employeeData.name === EmployeeName && employeeData.number == EmployeeNumber)
+                ){
+                setRedux(setUserData({employeeData}))
+                setPage('spinner');
+            }else{
+                if(employeeData.name !== EmployeeName || employeeData.number !== EmployeeNumber){
+                    setError('incorrect credentials please try again or contact your admin')
+                }
+            }
+        }else{
+            setError('User Does Not Exist \n Check Credentials')
+        }
+        })
+    }
     return(
         <div
             className = "setUser"
@@ -43,7 +52,7 @@ export const SetUser = (props)=>{
                         >Employee Name: </label>
                         <input
                             onChange={(e)=>{
-                                setEmpName(e.target.value)
+                                setEmpName(e.target.value.trim().toLowerCase())
                             }}
                         />
                     </Col>
@@ -62,15 +71,21 @@ export const SetUser = (props)=>{
                         />
                     </Col>
                 </Row>
+                    {error?<p
+                        className="errorState"
+                    >{error}</p>:''}
                     <Button
                         variant="success"
                         style={{marginTop:'10%'}}
                         onClick= {()=>{
+                            if(typeof employeeNumber !== 'number'){
+                                setError('numeric characters only for employee number')
+                            }
                             const employeeData = {
                                 name:empName,
                                 number:employeeNumber
                             }
-                            if(empName){
+                            if(empName && employeeNumber){
                             checkEmployee(employeeData,setPage,dispatch)
                             }
                         }}

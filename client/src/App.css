@@ -1,5 +1,7 @@
 body{
   padding-bottom:.5%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .App {

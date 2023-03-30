@@ -20,9 +20,10 @@ const setEmployeeVideoData = (emp, house, video) => {
 }
 
 
-export const SpinnerPage = ({ spinnerConfig }) => {
+export const SpinnerPage = () => {
   const selectedHouse = useSelector(currentHouse);
   const currentSpinner = useSelector(currentEmployee);
+
   const RenderWinnerLink = (winner, list,showHint) => {
     return (
       <>
@@ -32,20 +33,18 @@ export const SpinnerPage = ({ spinnerConfig }) => {
             setShowVideo(true);
           }}
         >
-          <h1>{winner}</h1>
+          <h6>{winner}</h6>
         </Button>
        {!showHint ? <p>Press the button to display the video</p>:''}
       </>
     )
   }
-  const { speedOfSpinner, spinnerEntries, linklist } = spinnerConfig || {};
   var arrContainer = {};
 
   selectedHouse?.links?.split(',').forEach((entry) => {
     const segmentForSpinner = entry.split(/-(.*)/g);
     arrContainer = { ...arrContainer, [segmentForSpinner[0]]: segmentForSpinner[1] }
   });
-  const spinnerTitle = currentHouse.name;
   const [showWinnerLink, setShowWinnerLink] = useState(false)
   const [winnerTitle, setWinnerTitle] = useState()
   const [showVideo, setShowVideo] = useState(false);

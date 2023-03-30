@@ -14,3 +14,7 @@
     margin-top: 10%;
     padding:1%;
 }
+
+.errorState{
+    color:red;
+}
