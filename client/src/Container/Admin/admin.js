@@ -52,11 +52,13 @@ export const Admin = () => {
     })
 
     return (
-        <>
+        <div id = {'adminPage'}>
             <p>ADMIN PAGE</p>
 
             <Container>
-                <Row>
+                <Row
+                    className = "listSection"
+                >
                     <Col
                         className="adminGroup"
                         xs={4}
@@ -176,6 +178,6 @@ export const Admin = () => {
                     {employeeToView ? <AdminDashBoard employeeKey={employeeToView} dataset={FullAdminDataSet} /> : ''}
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }

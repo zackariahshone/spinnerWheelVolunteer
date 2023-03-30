@@ -5,7 +5,7 @@ import { currentEmployee } from "../../store/Reducers/UserReducers";
 import { currentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import WheelComponent from 'react-wheel-of-prizes'
-
+import './style.css'
 
 const setEmployeeVideoData = (emp, house, video) => {
   console.log(emp, house, video);
@@ -15,7 +15,7 @@ const setEmployeeVideoData = (emp, house, video) => {
       'Content-Type': 'application/json'
     },
     method: 'POST',
-    body: JSON.stringify({emp, house, video })
+    body: JSON.stringify({ emp, house, video })
   })
 }
 
@@ -23,10 +23,10 @@ const setEmployeeVideoData = (emp, house, video) => {
 export const SpinnerPage = ({ spinnerConfig }) => {
   const selectedHouse = useSelector(currentHouse);
   const currentSpinner = useSelector(currentEmployee);
-  const RenderWinnerLink = (winner, list) => {
+  const RenderWinnerLink = (winner, list,showHint) => {
     return (
       <>
-      <Button
+        <Button
           onClick={() => {
             setEmployeeVideoData(currentSpinner, selectedHouse, winner)
             setShowVideo(true);
@@ -34,7 +34,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
         >
           <h1>{winner}</h1>
         </Button>
-        <p>Press the button to display the video</p>
+       {!showHint ? <p>Press the button to display the video</p>:''}
       </>
     )
   }
@@ -48,7 +48,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
   const spinnerTitle = currentHouse.name;
   const [showWinnerLink, setShowWinnerLink] = useState(false)
   const [winnerTitle, setWinnerTitle] = useState()
-  const [showVideo, setShowVideo] = useState();
+  const [showVideo, setShowVideo] = useState(false);
   const segments = [
     'better luck next time',
     'won 70',
@@ -86,7 +86,7 @@ export const SpinnerPage = ({ spinnerConfig }) => {
     <Container>
       {selectedHouse?.name ? selectedHouse.name : 'no house selected yet'}
       <Row>
-        <Col xs={6}>
+        <Col xs={3}>
           <Fragment>
             <WheelComponent
               segments={Object.keys(arrContainer).length !== 0 ? Object.keys(arrContainer) : segments}
@@ -105,29 +105,22 @@ export const SpinnerPage = ({ spinnerConfig }) => {
           </Fragment>
         </Col>
         <Col>
-          <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer) : ''}</p>
-          {console.log(showVideo)}
-          {showVideo ? 
-          <>
-          <div
-            onClick={(e)=>{
-              console.log(e,'iframe event')
-            }} 
-            >
-          <iframe 
-            onFocus={()=>{
-              console.log('iframe play')
-            }}
-            src={arrContainer[winnerTitle]} 
-            width="500" 
-            height="350" 
-            allow="autoplay"></iframe>
-          </div>  
-          <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a>
+          <div id="rel1" class="relative">
+            <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer,showVideo) : ''}</p>
+            {console.log(showVideo)}
+            {showVideo ?
+              <div>
+                <iframe
+                  src={arrContainer[winnerTitle]}
+                  width="500"
+                  height="350"
+                  allow="autoplay"></iframe>
+               <p> <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a></p>
+              </div>
 
-          </>
-            :''}
-          {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
+              : ''}
+            {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
+          </div>
         </Col>
       </Row>
     </Container>
