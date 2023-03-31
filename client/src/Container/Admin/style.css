@@ -21,12 +21,12 @@
 }
 .scrolllist{
     height: 400px;
-    overflow: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 1%;
 }
 .videoList{
-    height: 100px;
+    height: 250px;
     overflow: scroll;
     overflow-x: hidden;
     padding: 1%;

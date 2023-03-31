@@ -15,9 +15,23 @@ const findEmployeeData = (data, dataSet) => {
     })
     return emp;
 }
-
+const getVideoData = (videoArr)=>{
+let videoObjArr = []
+const videoSet = [... new Set(videoArr)];
+videoSet.forEach(videoKey=>{
+    let watched = 0;
+videoArr.forEach((video,x)=>{
+        if(videoKey === video){
+            watched +=1
+            videoObjArr[videoKey] = watched;
+        }
+    })
+})
+return videoObjArr;
+}
 
 export const AdminDashBoard = (props) => {
+
     const [empData, setEmpData] = useState();
     props.dataset.AllEmployee.forEach((emp) => {
         if (emp.name === props.employeeKey) {
@@ -26,7 +40,9 @@ export const AdminDashBoard = (props) => {
     })
 
     const thisEmpl = findEmployeeData(props.employeeKey, props.dataset.AllEmployee)
-    console.log(thisEmpl);
+    const videoObject = getVideoData(thisEmpl.VideosViewed)
+    console.log(videoObject);
+
     return (
 
         <Container>
@@ -37,8 +53,6 @@ export const AdminDashBoard = (props) => {
                 <Col>
                    <b> EmployeeNumber: </b> {thisEmpl?.EmployeeNumber}
                 </Col>
-            {/* </Row>
-            <Row> */}
                 <Col>
                    <b> Number Of Videos Viewed:</b> {thisEmpl?.VideosViewed?.length}
                 </Col>
@@ -47,9 +61,9 @@ export const AdminDashBoard = (props) => {
                     <div
                         className="videoList scroll"
                     >
-                        {thisEmpl?.VideosViewed.map((video)=>(
-                            <p>{video}</p>
-                        ))}
+                        { Object.entries(videoObject).map((videoData,x)=>{
+                      return <p>{videoData[0]} <br/><b>viewd : </b> { videoData[1] } times</p>
+                    })}
                     </div>
                     }
                 </Col>

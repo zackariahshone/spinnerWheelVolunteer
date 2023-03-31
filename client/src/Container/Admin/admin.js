@@ -56,6 +56,17 @@ export const Admin = () => {
             <p>ADMIN PAGE</p>
 
             <Container>
+            <Row>
+                <Col>
+                    <h4>Add House</h4>
+                    <p>Add Aditional Houses to list to select from</p>
+                </Col>
+                <Col> <h4>List of Houses</h4></Col>
+                <Col>  <h4>Employee Insight</h4>
+                        <p>Who has selected which videos</p>
+                </Col>
+
+            </Row>
                 <Row
                     className = "listSection"
                 >
@@ -63,7 +74,7 @@ export const Admin = () => {
                         className="adminGroup"
                         xs={4}
                     >
-                        <h4>add house</h4>
+                        
                         <InputGroup size="sm" className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm">House Name</InputGroup.Text>
                             <Form.Control
@@ -100,9 +111,9 @@ export const Admin = () => {
                         className="adminGroup"
                         xs={4}
                     >
-                        <h4>List of Houses</h4>
+                       
                         <div
-                            className="scroll scrollist"
+                            className="scroll scrolllist"
                         >
 
                         {houseSet.map((house) => {
@@ -136,8 +147,7 @@ export const Admin = () => {
                         </div>
                     </Col>
                     <Col>
-                        <h4>Employee Insight</h4>
-                        <p>Who has selected which videos</p>
+                      
                         <div
                             className="scrolllist scroll"
                         >
