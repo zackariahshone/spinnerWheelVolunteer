@@ -57,12 +57,12 @@ export const AdminDashBoard = (props) => {
                    <b> Number Of Videos Viewed:</b> {thisEmpl?.VideosViewed?.length}
                 </Col>
                 <Col>
-                   <b> Videos Viewed:</b> {!thisEmpl?.VideosViewed ? "No videos have been viewd":
+                   <b> Videos Viewed:</b> {!thisEmpl?.VideosViewed ? "No videos have been viewed":
                     <div
                         className="videoList scroll"
                     >
                         { Object.entries(videoObject).map((videoData,x)=>{
-                      return <p>{videoData[0]} <br/><b>viewd : </b> { videoData[1] } times</p>
+                      return <p>{videoData[0]} <br/><b>viewed : </b> { videoData[1] }  {videoData[1] === 1 ?'time':'times'}</p>
                     })}
                     </div>
                     }
