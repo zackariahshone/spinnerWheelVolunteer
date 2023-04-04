@@ -14,7 +14,9 @@
     margin-top: 10%;
     padding:1%;
 }
-
+.setUserInput{
+    width:100%;
+}
 .errorState{
     color:red;
 }

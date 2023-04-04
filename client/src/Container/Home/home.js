@@ -13,7 +13,6 @@ export const Home = () => {
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
     const pageConfig = []
-    const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
         switch (pageInput) {
             case 'home':
@@ -27,7 +26,7 @@ export const Home = () => {
                 break
         }
     }
-
+ 
     return (
         <Container>
 
