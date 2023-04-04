@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Col, Row, Container, Button } from "react-bootstrap";
 import { currentEmployee } from "../../store/Reducers/UserReducers";
 import { currentHouse } from "../../store/Reducers/HouseReducers";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import WheelComponent from 'react-wheel-of-prizes'
 import './style.css'
 
@@ -23,7 +23,7 @@ export const SpinnerPage = () => {
   const selectedHouse = useSelector(currentHouse);
   const currentSpinner = useSelector(currentEmployee);
 
-  const RenderWinnerLink = (winner, list,showHint) => {
+  const RenderWinnerLink = (winner, showHint) => {
     return (
       <>
         <Button
@@ -34,7 +34,7 @@ export const SpinnerPage = () => {
         >
           <h6>{winner}</h6>
         </Button>
-       {!showHint ? <p>Press the button to display the video</p>:''}
+        {!showHint ? <p>Press the button to display the video</p> : ''}
       </>
     )
   }
@@ -104,20 +104,19 @@ export const SpinnerPage = () => {
         </Col>
         <Col>
           <div id="rel1" class="relative">
-            <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, arrContainer,showVideo) : ''}</p>
-            {console.log(showVideo)}
+            <p> {showWinnerLink && arrContainer ? RenderWinnerLink(winnerTitle, showVideo) : ''}</p>
             {showVideo ?
               <div>
-                <iframe
+                <iframe 
+                  title={winnerTitle}
                   src={arrContainer[winnerTitle]}
                   width="500"
                   height="350"
                   allow="autoplay"></iframe>
-               <p> <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a></p>
+                <p> <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a></p>
               </div>
 
               : ''}
-            {/* when we have embeded links we can add an iframe into the website and keep everything in app */}
           </div>
         </Col>
       </Row>

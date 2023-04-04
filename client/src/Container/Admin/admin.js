@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
 import { getData } from "../../utils/requests"
 import { setAdminDashBoard, adminDataSet, deleteUser, deleteHouse } from '../../store/Reducers/AdminReducer';
@@ -52,29 +52,29 @@ export const Admin = () => {
     })
 
     return (
-        <div id = {'adminPage'}>
+        <div id={'adminPage'}>
             <p>ADMIN PAGE</p>
 
             <Container>
-            <Row>
-                <Col>
-                    <h4>Add House</h4>
-                    <p>Add Aditional Houses to list to select from</p>
-                </Col>
-                <Col> <h4>List of Houses</h4></Col>
-                <Col>  <h4>Employee Insight</h4>
+                <Row>
+                    <Col>
+                        <h4>Add House</h4>
+                        <p>Add Aditional Houses to list to select from</p>
+                    </Col>
+                    <Col> <h4>List of Houses</h4></Col>
+                    <Col>  <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
-                </Col>
+                    </Col>
 
-            </Row>
+                </Row>
                 <Row
-                    className = "listSection"
+                    className="listSection"
                 >
                     <Col
                         className="adminGroup"
                         xs={4}
                     >
-                        
+
                         <InputGroup size="sm" className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm">House Name</InputGroup.Text>
                             <Form.Control
@@ -111,71 +111,71 @@ export const Admin = () => {
                         className="adminGroup"
                         xs={4}
                     >
-                       
+
                         <div
                             className="scroll scrolllist"
                         >
 
-                        {houseSet.map((house) => {
-                            const houseKeys = Object.keys(house);
-                            return (
-                                <p
-                                    className="listItem"
-                                >
+                            {houseSet.map((house) => {
+                                const houseKeys = Object.keys(house);
+                                return (
+                                    <p
+                                        className="listItem"
+                                    >
 
-                                    <Button
-                                        className="listbutton"
-                                        onClick={(e) => {
-                                            dispatch(setCurrentHouse(
-                                                {
-                                                    links: house[houseKeys[0]],
-                                                    name: houseKeys[0]
-                                                }
-                                            ))
-                                            navigate('/');
-                                        }}
-                                    >{houseKeys[0]}</Button>
-                                    <span
-                                        className="delete"
-                                        onClick={() => {
-                                            getData('/deletehouse', 'POST', { id: house[houseKeys[1]] }, deleteUser, {}, 'res')
-                                        }}
-                                    ><b>x</b></span>
-                                </p>
-                            )
-                        })}
+                                        <Button
+                                            className="listbutton"
+                                            onClick={() => {
+                                                dispatch(setCurrentHouse(
+                                                    {
+                                                        links: house[houseKeys[0]],
+                                                        name: houseKeys[0]
+                                                    }
+                                                ))
+                                                navigate('/');
+                                            }}
+                                        >{houseKeys[0]}</Button>
+                                        <span
+                                            className="delete"
+                                            onClick={() => {
+                                                getData('/deletehouse', 'POST', { id: house[houseKeys[1]] }, deleteUser, {}, 'res')
+                                            }}
+                                        ><b>x</b></span>
+                                    </p>
+                                )
+                            })}
                         </div>
                     </Col>
                     <Col>
-                      
+
                         <div
                             className="scrolllist scroll"
                         >
 
-                        {empName.map((emp) => {
-                            const houseKeys = Object.keys(emp);
-                            return (
-                        <div id="box">
-                            <div id="borderLeft" className="bottom"></div>
-                                <p
-                                    className="listItem"
-                                >
-                                    <Button
-                                        className="listbutton"
-                                        onClick={(e) => {
-                                            setEmployeeToView(houseKeys[0])
-                                        }}
-                                    >{houseKeys[0]}</Button>
-                                    <span
-                                        className="delete"
-                                        onClick={() => {
-                                            getData('/deleteemployee', 'POST', { id: emp[houseKeys[1]] }, deleteHouse, {}, 'res')
-                                        }}
-                                    > <b>x</b></span>
-                                </p>
-                        </div>
-                            )
-                        })}
+                            {empName.map((emp) => {
+                                const houseKeys = Object.keys(emp);
+                                return (
+                                    <div id="box">
+                                        <div id="borderLeft" className="bottom"></div>
+                                        <p
+                                            className="listItem"
+                                        >
+                                            <Button
+                                                className="listbutton"
+                                                onClick={() => {
+                                                    setEmployeeToView(houseKeys[0])
+                                                }}
+                                            >{houseKeys[0]}</Button>
+                                            <span
+                                                className="delete"
+                                                onClick={() => {
+                                                    getData('/deleteemployee', 'POST', { id: emp[houseKeys[1]] }, deleteHouse, {}, 'res')
+                                                }}
+                                            > <b>x</b></span>
+                                        </p>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </Col>
                 </Row>
