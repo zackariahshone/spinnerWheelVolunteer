@@ -6,6 +6,8 @@ import { setCurrentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { AdminDashBoard } from "./dashboard";
+// import { SAMPLE, FORMAT } from "./sampleLinks";
+import ToolTip from "./tooltip";
 import "./style.css";
 
 
@@ -25,6 +27,7 @@ export const Admin = () => {
     const dispatch = useDispatch();
     const [newHouse, setNewHouse] = useState();
     const [employeeToView, setEmployeeToView] = useState();
+    const [showToolTip, setShowToolTip] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
     let houseSet = [];
     const empName = [];
@@ -53,7 +56,7 @@ export const Admin = () => {
 
     return (
         <div id={'adminPage'}>
-            <p>ADMIN PAGE</p>
+            <p>ADMIN DASHBOARD</p>
 
             <Container>
                 <Row>
@@ -61,6 +64,9 @@ export const Admin = () => {
                         <h4>Add House</h4>
                         <p>Add Aditional Houses to list to select from</p>
                     </Col>
+                            {showToolTip === true ?
+                               <ToolTip setShowToolTip={setShowToolTip} handleShow={showToolTip}/> : ''
+                            }
                     <Col> <h4>List of Houses</h4></Col>
                     <Col>  <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
@@ -106,6 +112,11 @@ export const Admin = () => {
 
                             }}
                         >submit house</Button>
+                         <p
+                        onMouseOver={() => {
+                            setShowToolTip(true)
+                        }}
+                    >info</p>
                     </Col>
                     <Col
                         className="adminGroup"

@@ -115,7 +115,6 @@ export const SpinnerPage = () => {
                   allow="autoplay"></iframe>
                 <p> <a className="winnertext" target="blank" href={arrContainer[winnerTitle]}> click here if video does not display</a></p>
               </div>
-
               : ''}
           </div>
         </Col>
