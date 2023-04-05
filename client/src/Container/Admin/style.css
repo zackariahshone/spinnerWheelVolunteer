@@ -1,3 +1,8 @@
+text{
+ margin:0;
+ padding: 0 !important;  
+ height: auto; 
+}
 #adminPage{
     height:100vh
 }
@@ -6,7 +11,7 @@
 }
 .infoArrow{
     font-size: x-large;
-    margin:-5%;
+    margin-bottom:-5%;
 }
 .adminGroup{
     border-style: solid;
@@ -30,10 +35,14 @@
     overflow-x: hidden;
     padding: 1%;
 }
+/* .toolTipModal{
+    width:50%;
+} */
 .modalBody{
     overflow-y: auto;
     padding: 1%;
     max-height: 400px;
+    width: 100%;
 }
 .videoList{
     height: 250px;
