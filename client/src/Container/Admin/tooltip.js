@@ -37,9 +37,10 @@ export default function ToolTip(props) {
           <br />
           <span> Once you have the collection of video you would like and matches the format in a csv pattern</span>
           <b />
-          <span>Then these values can then be pasted into the <i><b>Add entries for spinner</b></i> input field with a title for the house and press <b>submit</b>. Then you have success fully added your now house!</span>
+          <p>Then these values can then be pasted into the <i><b>Add entries for spinner</b></i> input field with a title for the house and press <b>submit</b>.</p>
+          <p> Then you have successfully added your new house!</p>
           <br />
-          <h5>example input:</h5>
+          <span><b>example input:</b></span>
           <text>
             <br />video title #1 - https://drive.google.com/file/d/13FRXw2Tsc-zbbkwtUfllY1Jc2jShg09P/preview,
             <br />video title #2 - https://drive.google.com/file/d/13FRXw2Tsc-zbbkwtUfllY1Jc2jShg09P/preview,
