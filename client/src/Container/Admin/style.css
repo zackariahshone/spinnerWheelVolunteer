@@ -1,7 +1,13 @@
 #adminPage{
     height:100vh
 }
-
+.addhouseButtons{
+    margin:5%;
+}
+.infoArrow{
+    font-size: x-large;
+    margin:-5%;
+}
 .adminGroup{
     border-style: solid;
     border-color: black;
@@ -12,7 +18,6 @@
     float: right;
     cursor: pointer;
 }
-
 .listItem{
     border-bottom: black;
     border-style: dotted;
@@ -25,9 +30,13 @@
     overflow-x: hidden;
     padding: 1%;
 }
+.modalBody{
+    overflow-y: auto;
+    padding: 1%;
+}
 .videoList{
     height: 250px;
-    overflow: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 1%;
 }

@@ -64,9 +64,9 @@ export const Admin = () => {
                         <h4>Add House</h4>
                         <p>Add Aditional Houses to list to select from</p>
                     </Col>
-                            {showToolTip === true ?
-                               <ToolTip setShowToolTip={setShowToolTip} handleShow={showToolTip}/> : ''
-                            }
+                    {showToolTip === true ?
+                        <ToolTip setShowToolTip={setShowToolTip} handleShow={showToolTip} /> : ''
+                    }
                     <Col> <h4>List of Houses</h4></Col>
                     <Col>  <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
@@ -106,17 +106,25 @@ export const Admin = () => {
                                 as="textarea" aria-label="With textarea" />
                         </InputGroup>
                         <Button
+                            className="addhouseButtons"
                             onClick={() => {
                                 HouseData('/addhouse', newHouse, 'POST');
                                 window.location.reload(true)
 
                             }}
                         >submit house</Button>
-                         <p
-                        onMouseOver={() => {
-                            setShowToolTip(true)
-                        }}
-                    >info</p>
+                        <br />
+                        <span> how to add a house</span>
+                        <br /><span>click here</span>
+                        <p
+                            className='infoArrow'
+                        >&dArr;</p>
+                        <Button
+                            className="addhouseButtons"
+                            onClick={() => {
+                                setShowToolTip(true)
+                            }}
+                        >info</Button>
                     </Col>
                     <Col
                         className="adminGroup"
@@ -192,7 +200,7 @@ export const Admin = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <h2>Dashbord</h2>
+                        {employeeToView ? <h2>Employee Data</h2> : ''}
                     </Col>
                 </Row>
                 <Row>
@@ -202,3 +210,5 @@ export const Admin = () => {
         </div>
     )
 }
+
+
