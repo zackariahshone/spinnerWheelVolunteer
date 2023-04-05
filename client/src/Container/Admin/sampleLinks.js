@@ -1,0 +1,2 @@
+export const FORMAT = '{title of video } - {link to video}'
+export const SAMPLE = 'Bite Release - https://drive.google.com/file/d/1saUdCdAEXKqfeVgA740FPuIh_3uGwwOs/preview, Front Choke Release-https://drive.google.com/file/d/1iL4_45vR9bmBrT_a224GSlgpnTJtOUSK/preview,Stripping a Grab- https://drive.google.com/file/d/18M9A0u9OXmMbz3KZ5fN0EpmIAyDtNzQL/preview,'

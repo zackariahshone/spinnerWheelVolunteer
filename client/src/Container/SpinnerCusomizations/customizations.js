@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Form, Button, Container, InputGroup } from "react-bootstrap";
 import './style.css'
 export const Customizations = ({ setConfig, config, setPage }) => {
-    // let linklist = {}   
     useEffect(()=>{},[config]);
-    console.log(config)
+    console.log(config) 
     return (
         <div className="custom">
             <Container>

@@ -1,3 +1,23 @@
 #whosSpinning{
     float:right;
 }
+
+.setUser{
+    border-width: 5px;
+    border-style: solid;
+    border-color: dimgray;
+    border-radius: 25px;
+    width:50%;
+    margin:auto;
+    top: 50%;
+    left: 50%;
+    margin-top: 10%;
+    padding:1%;
+}
+.setUserInput{
+    width:100%;
+    text-align: center;
+}
+.errorState{
+    color:red;
+}
