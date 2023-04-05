@@ -33,6 +33,7 @@
 .modalBody{
     overflow-y: auto;
     padding: 1%;
+    max-height: 400px;
 }
 .videoList{
     height: 250px;

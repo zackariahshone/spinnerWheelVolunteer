@@ -11,7 +11,7 @@ export default function ToolTip(props) {
           <Modal.Title>How to add a new house with links</Modal.Title>
         </Modal.Header>
         <Modal.Body
-          className='modalBody'
+          className='modalBody scroll'
         >
           <h5>Step 1.</h5>
           <p>navigate to the video you would like to add</p>
@@ -21,7 +21,9 @@ export default function ToolTip(props) {
           <p>You should see something similar to the snippet below. copy the link in <b>src</b> tag</p>
           <pre>
             <code>
-              <iframe src="https://drive.google.com/file/d/13FRXw2Tsc-zbbkwtUfllY1Jc2jShg09P/preview" width="640" height="480" allow="autoplay"></iframe>
+              <p>
+                <iframe src="https://drive.google.com/file/d/13FRXw2Tsc-zbbkwtUfllY1Jc2jShg09P/preview" width="640" height="480" allow="autoplay"></iframe>
+              </p>
             </code>
           </pre>
           <h5>Step 4</h5>
