@@ -1,5 +1,66 @@
+text{
+ margin:0;
+ padding: 0 !important;  
+ height: auto; 
+}
+#adminPage{
+    height:100vh
+}
+.addhouseButtons{
+    margin:5%;
+}
+.infoArrow{
+    font-size: x-large;
+    margin-bottom:-5%;
+}
 .adminGroup{
     border-style: solid;
     border-color: black;
     border-width: 0px 1px 0px 0px;
 }
+.delete{
+    color:red;
+    float: right;
+    cursor: pointer;
+}
+.listItem{
+    border-bottom: black;
+    border-style: dotted;
+    border-width: 0px 0px 1px 0px;
+    text-align: left;
+}
+.scrolllist{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1%;
+}
+/* .toolTipModal{
+    width:50%;
+} */
+.modalBody{
+    overflow-y: auto;
+    padding: 1%;
+    max-height: 400px;
+    width: 100%;
+}
+.videoList{
+    height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1%;
+}
+ .scroll::-webkit-scrollbar {
+     width: 15px;
+ }
+ 
+ .scroll::-webkit-scrollbar-track {
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+     border-radius: 10px;
+ }
+ 
+ .scroll::-webkit-scrollbar-thumb {
+     border-radius: 10px;
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+ }
+

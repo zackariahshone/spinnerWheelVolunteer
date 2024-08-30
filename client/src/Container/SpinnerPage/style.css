@@ -1,0 +1,27 @@
+.relative {
+    position: relative;
+    /* background-color: #cfc; */
+    /* border-color: #696; */
+    /* opacity: 0.7; */
+    /* right:0; */
+  }
+  #rel1 {
+    top: 30px;
+    left:55%;
+    width: 50%;
+  }
+  iframe{
+    width:100%;
+    box-shadow: 5px 5px 5px 1px;
+  }
+  #canvas{
+    width:250% !important;
+  }
+
+  @media only screen and (max-width: 600px){
+    #canvas{
+        /* width:200px !important; */
+        width: 20%;
+
+    }
+  }

@@ -2,16 +2,17 @@ import React, { Fragment, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Customizations as Custom } from "../SpinnerCusomizations/customizations";
 import { SpinnerPage } from "../SpinnerPage/spinnerPage";
-import { SetUser } from "./Components/SetUser";
+import { SetUser } from "./SetUser";
 import { useSelector } from "react-redux";
 import { currentEmployee } from "../../store/Reducers/UserReducers";
 import './style.css'
+import { currentHouse } from "../../store/Reducers/HouseReducers";
 export const Home = () => {
     const whosSpinning = useSelector(currentEmployee);
+    const selectedHouse = useSelector(currentHouse)
     const [page, setPage] = useState('home')
     const [spinnerConfig, setSpinnerConfig] = useState();
     const pageConfig = []
-    const {spinnerTitle } = spinnerConfig | {}
     const directPage = (pageInput) => {
         switch (pageInput) {
             case 'home':
@@ -25,7 +26,7 @@ export const Home = () => {
                 break
         }
     }
-
+ 
     return (
         <Container>
 
@@ -34,7 +35,7 @@ export const Home = () => {
                 id="whosSpinning"
             >{whosSpinning ? `${whosSpinning} is currently spinning!`: 'No body is signed in' }</span>
             <div>
-                <h1>{spinnerTitle ?spinnerTitle : page.toLocaleUpperCase()}</h1>
+                <h1>{selectedHouse ? `Spinning At ${selectedHouse.name}!` : page.toLocaleUpperCase()}</h1>
                 {pageConfig.map((nextPage,x) => {
                     return (
                         <Button
