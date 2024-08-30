@@ -6,12 +6,11 @@ import { setCurrentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { AdminDashBoard } from "./dashboard";
-// import { SAMPLE, FORMAT } from "./sampleLinks";
 import ToolTip from "./tooltip";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import "./style.css";
-
-
-// getAdminData()
+import HouseDetailModal from "./houseDetailModal.js";
 getData('/admindata', 'GET', {}, setAdminDashBoard, {})
 const HouseData = async (route, data, method) => {
     await fetch(route, {
@@ -28,6 +27,9 @@ export const Admin = () => {
     const [newHouse, setNewHouse] = useState();
     const [employeeToView, setEmployeeToView] = useState();
     const [showToolTip, setShowToolTip] = useState();
+    const [showHouseDetails, setShowHouseDetails] = useState();
+    const [showHouseTitle, setShowHouseTitle] = useState();
+    const [houseSelector, setHouseSelector] = useState();
     const FullAdminDataSet = useSelector(adminDataSet)
     let houseSet = [];
     const empName = [];
@@ -64,9 +66,9 @@ export const Admin = () => {
                         <h4>Add House</h4>
                         <p>Add Aditional Houses to list to select from</p>
                     </Col>
-                    {showToolTip === true ?
-                        <ToolTip setShowToolTip={setShowToolTip} handleShow={showToolTip} /> : ''
-                    }
+
+                    <ToolTip setShowToolTip={setShowToolTip} handleShow={showToolTip} />
+
                     <Col> <h4>List of Houses</h4></Col>
                     <Col>  <h4>Employee Insight</h4>
                         <p>Who has selected which videos</p>
@@ -80,15 +82,69 @@ export const Admin = () => {
                         className="adminGroup"
                         xs={4}
                     >
-
+                        {/**
+                     *ADD HOUSE SECITION
+                     */}
+                        <p>Adding a New House?</p>
+                        <Form.Check
+                            inline
+                            label="yes"
+                            name="group1"
+                            type="radio"
+                            id={`inline-1`}
+                            onChange={() => {
+                                setShowHouseTitle(true)
+                            }}
+                        />
+                        <Form.Check
+                            inline
+                            label="no"
+                            name="group1"
+                            type="radio"
+                            id={`inline-1`}
+                            onChange={() => {
+                                setShowHouseTitle(false)
+                            }}
+                        />
                         <InputGroup size="sm" className="mb-3">
-                            <InputGroup.Text id="inputGroup-sizing-sm">House Name</InputGroup.Text>
+
+                            {
+                                showHouseTitle ?
+                                    <>
+                                        <InputGroup.Text id="inputGroup-sizing-sm">Collection name</InputGroup.Text>
+                                        <Form.Control
+                                            aria-label="Small"
+                                            aria-describedby="inputGroup-sizing-sm"
+                                            onChange={(e) => {
+                                                setNewHouse({ ...newHouse, HouseName: e.target.value })
+                                            }}
+                                        />
+                                    </>
+                                    :
+                                    <>
+                                        <DropdownButton id="dropdown-basic-button" variant={'secondary'} title={houseSelector ? houseSelector : "Select a Collection to add to"}>
+                                        <Dropdown.Item href="#/action-1">...Select One</Dropdown.Item>
+                                            {Object.values(houseSet).map((house) => {
+                                               return <Dropdown.Item onClick={()=>{setHouseSelector(Object.keys(house)[0])}} href="#/action-1">{Object.keys(house)[0]}</Dropdown.Item>
+                                            })}
+                                        </DropdownButton>
+                                    </>
+                            }
+                            <br/>
+                            <InputGroup.Text id="inputGroup-sizing-sm">Spinner Name</InputGroup.Text>
                             <Form.Control
                                 aria-label="Small"
                                 aria-describedby="inputGroup-sizing-sm"
                                 onChange={(e) => {
-                                    console.log(newHouse)
-                                    setNewHouse({ ...newHouse, HouseName: e.target.value })
+                                    setNewHouse({ ...newHouse, spinnerName: e.target.value })
+                                }}
+                            />
+                            <InputGroup.Text id="inputGroup-sizing-sm">Spinner Type/topic</InputGroup.Text>
+                            <Form.Control
+                                aria-label="Small"
+                                aria-describedby="inputGroup-sizing-sm"
+                                onChange={(e) => {
+                                    setNewHouse({ ...newHouse, type: e.target.value })
                                 }}
                             />
                         </InputGroup>
@@ -134,7 +190,11 @@ export const Admin = () => {
                         <div
                             className="scroll scrolllist"
                         >
-
+                            {/**
+                            *
+                            *LIST OF HOUSES
+                            */}
+                            <HouseDetailModal title={''} setShowToolTip={setShowHouseDetails} handleShow={showHouseDetails} />
                             {houseSet.map((house) => {
                                 const houseKeys = Object.keys(house);
                                 return (
@@ -151,7 +211,8 @@ export const Admin = () => {
                                                         name: houseKeys[0]
                                                     }
                                                 ))
-                                                navigate('/');
+                                                // navigate('/');
+                                                setShowHouseDetails(true)
                                             }}
                                         >{houseKeys[0]}</Button>
                                         <span
@@ -170,7 +231,10 @@ export const Admin = () => {
                         <div
                             className="scrolllist scroll"
                         >
-
+                            {/**
+                            *
+                            * EMPLOYEE LIST SECTION 
+                            */}
                             {empName.map((emp) => {
                                 const houseKeys = Object.keys(emp);
                                 return (

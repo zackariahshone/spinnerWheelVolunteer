@@ -1,13 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import useSound from 'use-sound';
 import { Col, Row, Container, Button } from "react-bootstrap";
 import { currentEmployee } from "../../store/Reducers/UserReducers";
 import { currentHouse } from "../../store/Reducers/HouseReducers";
 import { useSelector } from 'react-redux';
 import WheelComponent from 'react-wheel-of-prizes'
 import './style.css'
+import spinnerEffect from './spinwheel.mp3';
 
 const setEmployeeVideoData = (emp, house, video) => {
-  console.log(emp, house, video);
   fetch('/addwatchedvideo', {
     headers: {
       'Accept': 'application/json',
@@ -22,7 +23,13 @@ const setEmployeeVideoData = (emp, house, video) => {
 export const SpinnerPage = () => {
   const selectedHouse = useSelector(currentHouse);
   const currentSpinner = useSelector(currentEmployee);
-
+  const spinnerSound = new Audio(spinnerEffect);
+  const [play, { stop }] = useSound(spinnerSound);
+  const [showWinnerLink, setShowWinnerLink] = useState(false)
+  const [winnerTitle, setWinnerTitle] = useState()
+  const [showVideo, setShowVideo] = useState(false);
+  const [playSound, setPlaySound] = useState(0);
+  
   const RenderWinnerLink = (winner, showHint) => {
     return (
       <>
@@ -44,9 +51,15 @@ export const SpinnerPage = () => {
     const segmentForSpinner = entry.split(/-(.*)/g);
     arrContainer = { ...arrContainer, [segmentForSpinner[0]]: segmentForSpinner[1] }
   });
-  const [showWinnerLink, setShowWinnerLink] = useState(false)
-  const [winnerTitle, setWinnerTitle] = useState()
-  const [showVideo, setShowVideo] = useState(false);
+  useEffect(()=>{
+    console.log(playSound);
+    if(playSound === true){
+      play()
+    }else if(playSound === false){
+      console.log('play sound in false');
+      stop();
+    }
+  })
   const segments = [
     'better luck next time',
     'won 70',
@@ -76,6 +89,7 @@ export const SpinnerPage = () => {
     '#FF9000'
   ]
   const onFinished = (winner) => {
+    setPlaySound(false);
     setShowVideo(false)
     setShowWinnerLink(true);
     setWinnerTitle(winner)
@@ -85,7 +99,11 @@ export const SpinnerPage = () => {
       {selectedHouse?.name ? selectedHouse.name : 'no house selected yet'}
       <Row>
         <Col xs={3}>
-          <Fragment>
+          <div 
+            onClick={()=>{
+              setPlaySound(true);
+            }}
+          >
             <WheelComponent
               segments={Object.keys(arrContainer).length !== 0 ? Object.keys(arrContainer) : segments}
               segColors={segColors}
@@ -99,8 +117,9 @@ export const SpinnerPage = () => {
               downDuration={250}
               fontFamily='Arial'
               mobile={true}
+             
             />
-          </Fragment>
+          </div>
         </Col>
         <Col>
           <div id="rel1" class="relative">

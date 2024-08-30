@@ -4,7 +4,7 @@ const { Schema, model } = require('mongoose');
   HouseName: {
     type: String,
   },
-  Videos:String
+  Videos: Schema.Types.Mixed
 });
 
 const Houses = model('House', HouseSchema);
